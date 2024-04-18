@@ -22,4 +22,11 @@ export class TasksService {
         await this.taskRepository.update(id, taskData as any);
         return this.taskRepository.findOne({ where: { id } }) ;
       }
-}
+
+      async assignToTeam(taskId: string, teamId: string): Promise<Task> {
+        const task = await this.taskRepository.findOne({ where: { id: taskId } });
+        task.teamId = teamId;
+        return this.taskRepository.save(task);
+      }
+
+    }

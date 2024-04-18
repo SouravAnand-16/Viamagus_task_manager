@@ -2,9 +2,9 @@ import { Entity, ObjectIdColumn, ObjectId, Column } from 'typeorm';
 
 @Entity()
 export class Task {
-    @ObjectIdColumn()
+    @Column({ primary: true })
     id: string;
-
+    
     @Column()
     description: string;
 
@@ -19,4 +19,5 @@ export class Task {
 
     @Column()
     teamId: string; 
+
 }

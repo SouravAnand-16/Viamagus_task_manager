@@ -3,7 +3,7 @@ import { Entity, ObjectIdColumn, ObjectId, Column } from 'typeorm';
 
 @Entity()
 export class Team {
-  @ObjectIdColumn()
+  @Column({ primary: true })
   id: string;
 
   @Column()
