@@ -16,4 +16,7 @@ export class Task {
 
     @Column()
     status: string;
+
+    @Column()
+    teamId: string; 
 }
