@@ -20,6 +20,6 @@ export class TasksService {
     
       async update(id: string, taskData: Partial<Task>): Promise<Task> {
         await this.taskRepository.update(id, taskData as any);
-        return this.taskRepository.findOne(id) ;
+        return this.taskRepository.findOne({ where: { id } }) ;
       }
 }
