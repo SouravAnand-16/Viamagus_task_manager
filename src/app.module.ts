@@ -1,9 +1,11 @@
-// src/app.module.ts
 
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TasksModule } from './tasks/tasks.modules';
 import { ConfigModule } from '@nestjs/config';
+import { TeamsModule } from './teams/team.module';
+import { Task } from './tasks/task.entity'; 
+import { Team } from './teams/team.entity'; 
 
 @Module({
   imports: [
@@ -13,10 +15,10 @@ import { ConfigModule } from '@nestjs/config';
       url: process.env.MongoURL,
       synchronize: true,
       useUnifiedTopology: true,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [Task, Team], 
     }),
     TasksModule,
+    TeamsModule
   ],
 })
 export class AppModule {}
-

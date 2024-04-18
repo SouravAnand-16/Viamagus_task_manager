@@ -1,15 +1,12 @@
 
-import { Entity, ObjectIdColumn, ObjectId, Column } from 'typeorm';
+import { Entity, ObjectIdColumn, ObjectId, Column, OneToMany } from 'typeorm';
 
 @Entity()
 export class Team {
-  @Column({ primary: true })
-  id: string;
+  @ObjectIdColumn()
+  id: ObjectId;
 
   @Column()
   name: string;
-
-  @Column()
-  members: string[]; 
 }
 

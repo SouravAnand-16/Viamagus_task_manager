@@ -2,8 +2,8 @@ import { Entity, ObjectIdColumn, ObjectId, Column } from 'typeorm';
 
 @Entity()
 export class Task {
-    @Column({ primary: true })
-    id: string;
+    @ObjectIdColumn()
+    id: ObjectId;
     
     @Column()
     description: string;

@@ -1,4 +1,3 @@
-// src/teams/team.service.ts
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -20,7 +19,7 @@ export class TeamService {
     return this.teamRepository.find();
   }
 
-  async findById(id: string): Promise<Team> {
-    return this.teamRepository.findOne({where : {id}});
-  }
+  // async findById(id: string): Promise<Team> {
+  //   return this.teamRepository.findOne(id);
+  // }
 }

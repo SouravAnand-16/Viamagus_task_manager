@@ -16,8 +16,8 @@ export class TeamsController {
         return this.teamService.findAll();
     }
 
-    @Get(':id')
-    findById(@Param('id') id:string): Promise<Team> {
-        return this.teamService.findById(id);
-    }
+    // @Get(':id')
+    // findById(@Param('id') id:string): Promise<Team> {
+    //     return this.teamService.findById(id);
+    // }
 }
