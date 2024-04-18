@@ -24,16 +24,17 @@ export class TasksService {
        }
       }
     
-      // async update(id: string, taskData: Partial<Task>): Promise<Task> {
-      //   await this.taskRepository.update(id, taskData as any);
-      //   return this.taskRepository.findOne({ where: { id } }) ;
-      // }
+      
+      async update(id: string, taskData: Partial<Task>): Promise<Task> {
+        await this.taskRepository.update(id, taskData as any);
+        return this.taskRepository.findOne({ where: { _id: new ObjectId(id) } } ) ;
+      }
 
       async assignToTeam(taskId: string, teamId: string): Promise<Task> {
         try {
           console.log(`Assigning task ${taskId} to team ${teamId}`);
           
-           const task = await this.taskRepository.findOne({ where: { id: new ObjectId(taskId) } });
+           const task = await this.taskRepository.findOne({ where: { _id: new ObjectId(taskId) } });
            console.log('Retrieved task:', task);
           if (!task) {
             throw new Error(`Task with id ${taskId} not found`);
