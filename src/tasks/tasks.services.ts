@@ -29,4 +29,8 @@ export class TasksService {
         return this.taskRepository.save(task);
       }
 
+      async findByAssignee(assignee: string): Promise<Task[]> {
+        return this.taskRepository.find({ where: { assignee } });
+      }
+
     }
