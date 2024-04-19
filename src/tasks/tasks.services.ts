@@ -70,4 +70,13 @@ export class TasksService {
       async findByAssignee(assignee: string): Promise<Task[]> {
         return await this.taskRepository.find({ where: { assigneeTeam: { _id: new ObjectId(assignee) } } });
       }
+
+      async updateTask(id: string, updatedTask: Partial<Task>): Promise<Task> {
+        const task = await this.taskRepository.findOne({ where: { _id: new ObjectId(id) } });
+        if (!task) {
+          throw new NotFoundException('Task not found');
+        }
+        Object.assign(task, updatedTask);
+        return await this.taskRepository.save(task);
+      }
     }

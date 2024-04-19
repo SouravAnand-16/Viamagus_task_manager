@@ -33,5 +33,10 @@ export class TasksController {
   findByAssignee(@Param('assignee') assignee: string) {
     return this.tasksService.findByAssignee(assignee);
   }
+
+  @Put(':id')
+  async updateTask(@Param('id') id: string, @Body() updatedTask: Partial<Task>) {
+    return await this.tasksService.updateTask(id, updatedTask);
+  }
   
 }
