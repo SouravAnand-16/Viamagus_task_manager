@@ -1,7 +1,8 @@
 
-import { Controller, Get, Post, Body, Put, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param  , UseGuards} from '@nestjs/common';
 import { TasksService } from './tasks.services';
 import { Task } from './task.entity';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('tasks')
 export class TasksController {
@@ -9,11 +10,13 @@ export class TasksController {
   constructor(private  tasksService: TasksService) {}
 
   @Get()
+  //@UseGuards(JwtAuthGuard)
   findAll(): Promise<Task[]> {
     return this.tasksService.findAll();
   }
 
   @Post()
+ // @UseGuards(JwtAuthGuard)
   create(@Body() task: Task): Promise<Task> {
     return this.tasksService.create(task);
   }
