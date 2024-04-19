@@ -5,6 +5,7 @@ import { Task } from './task.entity';
 
 @Controller('tasks')
 export class TasksController {
+  taskRepository: any;
   constructor(private  tasksService: TasksService) {}
 
   @Get()
@@ -17,10 +18,10 @@ export class TasksController {
     return this.tasksService.create(task);
   }
 
-  // @Put(':id')
-  // update(@Param('id') id: string, @Body() task: Partial<Task>): Promise<Task> {
-  //   return this.tasksService.update(id, task);
-  // }
+  @Put(':id')
+  update(@Param('id') id: string, @Body() task: Partial<Task>): Promise<Task> {
+    return this.tasksService.update(id, task);
+  }
 
   @Put(':id/assign-to-team/:teamId')
   assignToTeam(@Param('id') taskId: string, @Param('teamId') teamId: string): Promise<Task> {
@@ -29,7 +30,7 @@ export class TasksController {
   }
 
   @Get('assignee/:assignee')
-  findByAssignee(@Param('assignee') assignee: string): Promise<Task[]> {
+  findByAssignee(@Param('assignee') assignee: string) {
     return this.tasksService.findByAssignee(assignee);
   }
   

@@ -1,11 +1,12 @@
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ObjectId, Repository } from 'typeorm';
 import { Team } from './team.entity';
 
 @Injectable()
 export class TeamService {
+
   constructor(
     @InjectRepository(Team)
     private teamRepository: Repository<Team>,
@@ -19,7 +20,17 @@ export class TeamService {
     return this.teamRepository.find();
   }
 
-  // async findById(id: string): Promise<Team> {
-  //   return this.teamRepository.findOne(id);
-  // }
+  async findOne(id: string): Promise<Team> {
+    const team = await this.teamRepository.findOne({ where: { _id: new ObjectId(id) } });
+    if (!team) {
+      throw new NotFoundException(`Team with ID ${id} not found`);
+    }
+    return team;
+  }
+
+  
+  async remove(id: string): Promise<void> {
+    const team = await this.findOne(id);
+    await this.teamRepository.remove(team);
+  }
 }

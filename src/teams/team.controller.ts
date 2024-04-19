@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { Team } from './team.entity';
 import { TeamService } from './team.service';
 
@@ -16,8 +16,13 @@ export class TeamsController {
         return this.teamService.findAll();
     }
 
-    // @Get(':id')
-    // findById(@Param('id') id:string): Promise<Team> {
-    //     return this.teamService.findById(id);
-    // }
+    @Get(':id')
+    findOne(@Param('id') id: string) {
+      return this.teamService.findOne(id);
+    }
+
+    @Delete(':id')
+    remove(@Param('id') id: string) {
+      return this.teamService.remove(id);
+    }
 }

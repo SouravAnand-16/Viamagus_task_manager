@@ -1,4 +1,5 @@
-import { Entity, ObjectIdColumn, ObjectId, Column } from 'typeorm';
+import { Team } from 'src/teams/team.entity';
+import { Entity, ObjectIdColumn, ObjectId, Column, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Task {
@@ -12,12 +13,10 @@ export class Task {
     dueDate: Date;
 
     @Column()
-    assignee: string;
-
-    @Column()
     status: string;
 
-    @Column()
-    teamId: string; 
+  
+    @ManyToOne(() => Team)
+    assigneeTeam: Team;
 
 }
